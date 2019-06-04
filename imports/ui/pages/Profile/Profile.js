@@ -5,6 +5,7 @@ import {Meteor} from "meteor/meteor";
 // import { Typography } from "@material-ui/core";
 const Profile = props => {
   console.log("from the profile page");
+  console.log(props.users[0]);
   return <div>This is the Profile page for</div>;
 };
 
