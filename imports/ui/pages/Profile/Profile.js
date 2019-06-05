@@ -1,17 +1,17 @@
 import React from "react";
 import {withTracker} from "meteor/react-meteor-data";
-import {Users} from "../../../../imports/api/users";
+import {Clients} from "../../../api/clients"
 import {Meteor} from "meteor/meteor";
 // import { Typography } from "@material-ui/core";
 const Profile = props => {
   console.log("from the profile page");
-  console.log(props.users[0]);
+  console.log(props.clients[0]);
   return <div>This is the Profile page for</div>;
 };
 
 export default withTracker(() => {
-  Meteor.subscribe("users"); // NEW!
+  Meteor.subscribe("clients"); // NEW!
   return {
-    users: Users.find({}).fetch()
+    clients: Clients.find({}).fetch()
   };
 })(Profile);
