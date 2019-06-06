@@ -5,6 +5,7 @@ import {Button, FormControl, Typography, TextField} from "@material-ui/core";
 import ReactDOM from "react-dom";
 import {Form, Field} from "react-final-form";
 import {FORM_ERROR} from "final-form";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import "./styles.css";
 
 class AccountsUI extends Component {
@@ -14,6 +15,21 @@ class AccountsUI extends Component {
       loginToggle: true
     };
   }
+
+  facebookLogin = () => {
+    Meteor.loginWithFacebook(
+      {
+        requestPermissions: ["user_friends", "public_profile", "email"]
+      },
+      err => {
+        if (err) {
+          // handle error
+        } else {
+          // successful login!
+        }
+      }
+    );
+  };
 
   onSubmit = values => {
     if (this.state.loginToggle) {
@@ -47,6 +63,10 @@ class AccountsUI extends Component {
     const {classes} = this.props;
     return (
       <div>
+        <div onClick={this.facebookLogin}>
+          <FontAwesomeIcon icon={["fab", "facebook"]} />
+          <div>Sign in With Facebook</div>
+        </div>
         <Form
           onSubmit={(values, err) => this.onSubmit(values, err)}
           render={({

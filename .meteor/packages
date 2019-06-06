@@ -20,4 +20,4 @@ react-meteor-data
 accounts-ui
 accounts-password
 service-configuration
-accounts-github
+accounts-facebook
