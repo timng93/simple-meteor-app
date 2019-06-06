@@ -1,17 +1,32 @@
 import React from "react";
 import Profile from "../ui/pages/Profile";
 import Welcome from "../ui/pages/Welcome";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
+import {withRouter} from "react-router";
+import {withTracker} from "meteor/react-meteor-data";
 
-const Layout = () => {
-  return (
-    <Router>
-      <div>
+const Layout = ({loggedOut}) => {
+  if (loggedOut) {
+    return (
+      <Switch>
         <Route exact path="/welcome" component={Welcome} />
-        <Route exact path="/profile" component={Profile} />
-      </div>
-    </Router>
-  );
+        <Redirect from="*" to="/welcome" />;
+      </Switch>
+    );
+  } else {
+    return (
+      <Switch>
+        <Route exact path="/home" component={Profile} />
+        <Redirect from="*" to="/home" />
+      </Switch>
+    );
+  }
 };
 
-export default Layout;
+export default withRouter(
+  withTracker(() => {
+    return {
+      loggedOut: !Meteor.user() && !Meteor.loggingIn()
+    };
+  })(Layout)
+);

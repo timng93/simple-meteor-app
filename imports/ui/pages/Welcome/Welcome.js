@@ -1,13 +1,16 @@
 import React from "react";
 import AccountsUI from "../../components/AccountsUI";
+import styles from "./styles";
+import {withStyles} from "@material-ui/core/styles";
+
 // import { Typography } from "@material-ui/core";
-const Welcome = props => {
+const Welcome = ({classes}) => {
   console.log("from the welcome page");
   return (
-    <div>
+    <div className={classes.form}>
       <AccountsUI />
     </div>
   );
 };
 
-export default Welcome;
+export default withStyles(styles)(Welcome);
