@@ -9,13 +9,11 @@ import styles from "./styles";
 const Teams = ({currentUser, groups}) => {
   console.log(currentUser);
   console.log(groups);
-  testGroups = [{name: "Thor"}, {name: "Captain America"}];
-
   return (
     <Fragment>
       <Typography>Teams</Typography>
-      {testGroups.map(({name}) => (
-        <Typography>{name}</Typography>
+      {groups.map(({name, _id}) => (
+        <Typography key={_id}>{name}</Typography>
       ))}
     </Fragment>
   );
