@@ -5,15 +5,11 @@ import Typography from "@material-ui/core/Typography";
 import {withStyles} from "@material-ui/core/styles";
 import styles from "./styles";
 
-const Profile = ({currentUser}) => {
+const Teams = ({currentUser}) => {
   console.log(currentUser);
   return (
     <Fragment>
-      {currentUser ? (
-        <div>
-          {currentUser.username} {currentUser.emails[0].address}
-        </div>
-      ) : null}
+      <Typography>Teams</Typography>
     </Fragment>
   );
 };
@@ -21,4 +17,4 @@ export default withTracker(() => {
   return {
     currentUser: Meteor.user()
   };
-})(withStyles(styles)(Profile));
+})(withStyles(styles)(Teams));

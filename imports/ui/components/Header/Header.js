@@ -96,7 +96,12 @@ function Header() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to={`/home`}>
+                  Profile
+                </MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to={`/teams`}>
+                  Teams
+                </MenuItem>
                 <MenuItem
                   className={classes.menuItem}
                   onClick={() => Meteor.logout()}
