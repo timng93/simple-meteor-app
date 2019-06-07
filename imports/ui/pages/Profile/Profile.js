@@ -1,17 +1,25 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {withTracker} from "meteor/react-meteor-data";
-import {Clients} from "../../../api/clients"
+import {Clients} from "../../../api/clients";
 import {Meteor} from "meteor/meteor";
-// import { Typography } from "@material-ui/core";
-const Profile = props => {
-  console.log("from the profile page");
-  console.log(props.clients[0]);
-  return <div>This is the Profile page for</div>;
-};
+import Typography from "@material-ui/core/Typography";
+import {withStyles} from "@material-ui/core/styles";
+import styles from "./styles";
 
+const Profile = ({currentUser}) => {
+  console.log(currentUser);
+  return (
+    <Fragment>
+      {currentUser ? (
+        <div>
+          {currentUser.username} {currentUser.emails[0].address}
+        </div>
+      ) : null}
+    </Fragment>
+  );
+};
 export default withTracker(() => {
-  Meteor.subscribe("clients"); // NEW!
   return {
-    clients: Clients.find({}).fetch()
+    currentUser: Meteor.user()
   };
-})(Profile);
+})(withStyles(styles)(Profile));
