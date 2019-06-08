@@ -9,4 +9,9 @@ if (Meteor.isServer) {
       return Groups.find({});
     })
   );
+  Groups.allow({
+    insert: () => {
+      return true;
+    }
+  });
 }
