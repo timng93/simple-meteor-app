@@ -3,7 +3,6 @@ import AccountsUI from "../../components/AccountsUI";
 import styles from "./styles";
 import {withStyles} from "@material-ui/core/styles";
 
-// import { Typography } from "@material-ui/core";
 const Welcome = ({classes}) => {
   console.log("from the welcome page");
   return (

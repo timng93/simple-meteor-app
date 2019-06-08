@@ -60,7 +60,6 @@ class AccountsUI extends Component {
   };
 
   render() {
-    const {classes} = this.props;
     return (
       <div>
         <div onClick={this.facebookLogin}>
