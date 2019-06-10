@@ -28,7 +28,7 @@ class ProfileCard extends Component {
       Meteor.users.update(this.props.currentUserId, {
         $set: {
           username: values.username,
-          email: values.email
+          "emails[0]address": values.email
         }
       });
       if (err) {

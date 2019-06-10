@@ -8,9 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import {withStyles} from "@material-ui/core/styles";
 import styles from "./styles";
 
-const Teams = ({classes, currentUser, groups}) => {
+const Teams = ({classes, currentUser, users, groups}) => {
   console.log(currentUser);
   console.log(groups);
+  console.log(users);
   return (
     <Fragment>
       <Typography>Teams</Typography>
@@ -21,14 +22,16 @@ const Teams = ({classes, currentUser, groups}) => {
         Let's create a new team
       </Typography>
       <TeamsUI />
-      <SelectMemberForm groups={groups} />
+      <SelectMemberForm groups={groups} users={users} />
     </Fragment>
   );
 };
 export default withTracker(() => {
   Meteor.subscribe("groups");
+  Meteor.subscribe("users");
   return {
     groups: Groups.find({}).fetch(),
-    currentUser: Meteor.user()
+    currentUser: Meteor.user(),
+    users: Meteor.users.find({}).fetch()
   };
 })(withStyles(styles)(Teams));

@@ -1,13 +1,32 @@
 import React, {Component} from "react";
 import Select from "react-select";
 
-const options = [
-  {value: "chocolate", label: "Chocolate"},
-  {value: "strawberry", label: "Strawberry"},
-  {value: "vanilla", label: "Vanilla"}
-];
-
-const SelectMemberForm = () => <Select isMulti options={options} />;
-console.log(SelectMemberForm);
+class SelectMemberForm extends Component {
+  state = {
+    selectedOption: null
+  };
+  handleChange = selectedOption => {
+    this.setState({selectedOption});
+    console.log(`Option selected:`, selectedOption);
+  };
+  render() {
+    const {selectedOption} = this.state;
+    const {users} = this.props;
+    const allUsers = users.map(user => ({
+      label: user.username,
+      value: user._id,
+      // email: user.emails[0].address
+    }));
+    console.log(users);
+    return (
+      <Select
+        isMulti
+        value={selectedOption}
+        onChange={this.handleChange}
+        options={allUsers}
+      />
+    );
+  }
+}
 
 export default SelectMemberForm;
