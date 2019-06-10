@@ -6,13 +6,21 @@ import {Button, FormControl, Typography, TextField} from "@material-ui/core";
 import {Form, Field} from "react-final-form";
 import styles from "./styles";
 import {withStyles} from "@material-ui/core/styles";
+import Select from "react-select";
 
-const TeamsUI = () => {
-  onSubmit = ({name}) => {
+const TeamsUI = ({users}) => {
+  onSubmit = ({name, options}) => {
     Groups.insert({
-      name
+      name,
+      selectedMembers: options
     });
   };
+
+  allUsers = users.map(user => ({
+    label: user.username,
+    value: user._id
+  }));
+
   return (
     <div>
       <Form
@@ -47,6 +55,16 @@ const TeamsUI = () => {
                         margin="normal"
                         variant="outlined"
                       />
+                    </div>
+                  )}
+                />
+              </FormControl>
+              <FormControl>
+                <Field
+                  name="options"
+                  render={({input, meta}) => (
+                    <div>
+                      <Select isMulti {...input} options={allUsers} />
                     </div>
                   )}
                 />

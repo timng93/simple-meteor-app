@@ -3,7 +3,6 @@ import {withTracker} from "meteor/react-meteor-data";
 import {Meteor} from "meteor/meteor";
 import {Groups} from "../../../api/groups";
 import TeamsUI from "../../components/TeamsUI";
-import SelectMemberForm from "../../components/SelectMemberForm";
 import Typography from "@material-ui/core/Typography";
 import {withStyles} from "@material-ui/core/styles";
 import styles from "./styles";
@@ -21,8 +20,7 @@ const Teams = ({classes, currentUser, users, groups}) => {
       <Typography className={classes.header}>
         Let's create a new team
       </Typography>
-      <TeamsUI />
-      <SelectMemberForm groups={groups} users={users} />
+      <TeamsUI users={users} />
     </Fragment>
   );
 };
