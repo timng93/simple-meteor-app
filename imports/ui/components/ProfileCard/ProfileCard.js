@@ -1,7 +1,5 @@
 import React, {Component, Fragment} from "react";
 import {Meteor} from "meteor/meteor";
-import {Groups} from "../../../api/groups";
-import {withTracker} from "meteor/react-meteor-data";
 import {
   Typography,
   Paper,
@@ -10,7 +8,6 @@ import {
   FormControl,
   TextField
 } from "@material-ui/core";
-import {Link} from "react-router-dom";
 import {Form, Field} from "react-final-form";
 import styles from "./styles";
 import {withStyles} from "@material-ui/core/styles";
@@ -38,9 +35,15 @@ class ProfileCard extends Component {
       null;
     }
   };
+
   render() {
     const {isEditing} = this.state;
     const {classes, currentUser} = this.props;
+    const selectedGroups = this.props.groups.filter(group => {
+      return group.selectedMembers.find(selectedMember => {
+        return selectedMember.label === currentUser.username;
+      });
+    });
     return (
       <div>
         {isEditing ? (
@@ -127,6 +130,15 @@ class ProfileCard extends Component {
                   className={classes.chip}
                   variant="outlined"
                 />
+                <Typography className={classes.pageTitle}>My Teams</Typography>
+                {selectedGroups.map(selectedGroup => (
+                  <Chip
+                    key={selectedGroup._id}
+                    label={`${selectedGroup.name}`}
+                    className={classes.chip}
+                    variant="outlined"
+                  />
+                ))}
               </div>
             </Paper>
             <Typography>
@@ -148,12 +160,4 @@ class ProfileCard extends Component {
   }
 }
 
-export default withTracker(() => {
-  Meteor.subscribe("groups");
-
-  return {
-    groups: Groups.find().fetch(),
-    currentUser: Meteor.user(),
-    currentUserId: Meteor.userId()
-  };
-})(withStyles(styles)(ProfileCard));
+export default withStyles(styles)(ProfileCard);

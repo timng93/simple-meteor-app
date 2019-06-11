@@ -14,11 +14,13 @@ Meteor.startup(() => {
   if (Groups.find().count() === 0) {
     Groups.insert({
       _id: "1",
-      name: "Thor"
+      name: "Thor",
+      selectedMembers: [{label: "tim"}, {label: "sam"}]
     });
     Groups.insert({
       _id: "2",
-      name: "Captain America"
+      name: "Captain America",
+      selectedMembers: [{label: "tim"}, {label: "sam"}]
     });
   }
   ServiceConfiguration.configurations.remove({
