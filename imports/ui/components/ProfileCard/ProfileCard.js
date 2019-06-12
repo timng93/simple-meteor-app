@@ -141,7 +141,7 @@ class ProfileCard extends Component {
                 ))}
               </div>
             </Paper>
-            <Typography>
+            <Typography className={classes.button}>
               <button
                 type="button"
                 onClick={() => {
