@@ -41,7 +41,7 @@ const TeamsUI = ({users, classes}) => {
                 handleSubmit(e);
               }}
             >
-              <FormControl fullWidth>
+              <FormControl fullWidth margin="normal">
                 <Field
                   name="name"
                   render={({input, meta}) => (
@@ -59,7 +59,7 @@ const TeamsUI = ({users, classes}) => {
                   )}
                 />
               </FormControl>
-              <FormControl fullWidth>
+              <FormControl fullWidth margin="normal">
                 <Field
                   name="options"
                   render={({input, meta}) => (
@@ -69,7 +69,7 @@ const TeamsUI = ({users, classes}) => {
                   )}
                 />
               </FormControl>
-              <FormControl>
+              <FormControl margin="normal">
                 <Button
                   type="submit"
                   variant="contained"
