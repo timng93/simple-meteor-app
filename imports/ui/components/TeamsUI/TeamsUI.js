@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from "react";
+import React from "react";
 import {Meteor} from "meteor/meteor";
 import {Groups} from "../../../api/groups";
 import {withTracker} from "meteor/react-meteor-data";
@@ -39,7 +39,6 @@ const TeamsUI = ({users, classes}) => {
         validate={this.validate}
         render={({
           handleSubmit,
-          form,
           submitting,
           pristine,
           hasValidationErrors,
