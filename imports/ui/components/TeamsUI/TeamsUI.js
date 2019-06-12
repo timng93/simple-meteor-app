@@ -8,7 +8,7 @@ import styles from "./styles";
 import {withStyles} from "@material-ui/core/styles";
 import Select from "react-select";
 
-const TeamsUI = ({users}) => {
+const TeamsUI = ({users, classes}) => {
   onSubmit = ({name, options}) => {
     Groups.insert({
       name,
@@ -41,7 +41,7 @@ const TeamsUI = ({users}) => {
                 handleSubmit(e);
               }}
             >
-              <FormControl>
+              <FormControl fullWidth>
                 <Field
                   name="name"
                   render={({input, meta}) => (
@@ -59,7 +59,7 @@ const TeamsUI = ({users}) => {
                   )}
                 />
               </FormControl>
-              <FormControl>
+              <FormControl fullWidth>
                 <Field
                   name="options"
                   render={({input, meta}) => (
