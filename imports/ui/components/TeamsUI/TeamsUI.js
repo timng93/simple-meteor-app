@@ -21,10 +21,22 @@ const TeamsUI = ({users, classes}) => {
     value: user._id
   }));
 
+  validate = values => {
+    const errors = {};
+    if (!values.name) {
+      errors.name = "Team name is required";
+    }
+    if (!values.options) {
+      errors.options = "At least one member is required";
+    }
+    return errors;
+  };
+
   return (
     <div>
       <Form
         onSubmit={(values, err) => this.onSubmit(values, err)}
+        validate={this.validate}
         render={({
           handleSubmit,
           form,
@@ -55,6 +67,11 @@ const TeamsUI = ({users, classes}) => {
                         margin="normal"
                         variant="outlined"
                       />
+                      {meta.touched && meta.invalid && (
+                        <Typography className={classes.errorMessage}>
+                          {meta.error}
+                        </Typography>
+                      )}
                     </div>
                   )}
                 />
@@ -65,6 +82,14 @@ const TeamsUI = ({users, classes}) => {
                   render={({input, meta}) => (
                     <div>
                       <Select isMulti {...input} options={allUsers} />
+                      {meta.touched && meta.invalid && (
+                        <Typography
+                          align="left"
+                          className={classes.errorMessage}
+                        >
+                          {meta.error}
+                        </Typography>
+                      )}
                     </div>
                   )}
                 />
@@ -79,6 +104,11 @@ const TeamsUI = ({users, classes}) => {
                   Submit
                 </Button>
               </FormControl>
+              {hasSubmitErrors && (
+                <Typography className={classes.errorMessage}>
+                  {submitError}
+                </Typography>
+              )}
             </form>
           );
         }}
