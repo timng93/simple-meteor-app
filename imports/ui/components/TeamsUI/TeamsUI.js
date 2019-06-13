@@ -4,6 +4,9 @@ import {Form, Field} from "react-final-form";
 import styles from "./styles";
 import {withStyles} from "@material-ui/core/styles";
 import Select from "react-select";
+import {withTracker} from "meteor/react-meteor-data";
+import {Meteor} from "meteor/meteor";
+import {Groups} from "../../../api/groups";
 import PropTypes from "prop-types";
 
 const TeamsUI = ({users, classes, groups}) => {
@@ -101,10 +104,18 @@ const TeamsUI = ({users, classes, groups}) => {
     </div>
   );
 };
+
 TeamsUI.propTypes = {
   classes: PropTypes.object.isRequired,
   groups: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired
 };
 
-export default withStyles(styles)(TeamsUI);
+export default withTracker(() => {
+  Meteor.subscribe("groups");
+  Meteor.subscribe("users");
+  return {
+    groups: Groups.find({}).fetch(),
+    users: Meteor.users.find({}).fetch()
+  };
+})(withStyles(styles)(TeamsUI));
