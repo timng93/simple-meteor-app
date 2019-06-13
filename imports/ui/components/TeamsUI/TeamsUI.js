@@ -37,14 +37,7 @@ const TeamsUI = ({users, classes}) => {
       <Form
         onSubmit={(values, err) => this.onSubmit(values, err)}
         validate={this.validate}
-        render={({
-          handleSubmit,
-          submitting,
-          pristine,
-          hasValidationErrors,
-          hasSubmitErrors,
-          submitError
-        }) => {
+        render={({handleSubmit, submitting, pristine, hasValidationErrors}) => {
           return (
             <form
               onSubmit={e => {
@@ -103,11 +96,6 @@ const TeamsUI = ({users, classes}) => {
                   Submit
                 </Button>
               </FormControl>
-              {hasSubmitErrors && (
-                <Typography className={classes.errorMessage}>
-                  {submitError}
-                </Typography>
-              )}
             </form>
           );
         }}

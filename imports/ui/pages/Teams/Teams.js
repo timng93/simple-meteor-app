@@ -15,10 +15,7 @@ import {
 import {withStyles} from "@material-ui/core/styles";
 import styles from "./styles";
 
-const Teams = ({classes, currentUser, users, groups}) => {
-  console.log(currentUser);
-  console.log(groups);
-  console.log(users);
+const Teams = ({classes, users, groups}) => {
   return (
     <Fragment>
       <Typography className={classes.header}>Teams</Typography>
@@ -27,8 +24,8 @@ const Teams = ({classes, currentUser, users, groups}) => {
           <Typography className={classes.teamName}>{name}</Typography>
           <Typography className={classes.teamLabel}>Members:</Typography>
           <List>
-            {selectedMembers.map(selectedMember => (
-              <div>
+            {selectedMembers.map((selectedMember, index) => (
+              <div key={index}>
                 <ListItem>
                   <ListItemIcon>
                     <FaceIcon />
@@ -52,7 +49,6 @@ export default withTracker(() => {
   Meteor.subscribe("users");
   return {
     groups: Groups.find({}).fetch(),
-    currentUser: Meteor.user(),
     users: Meteor.users.find({}).fetch()
   };
 })(withStyles(styles)(Teams));
