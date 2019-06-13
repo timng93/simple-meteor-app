@@ -6,6 +6,7 @@ import {Form, Field} from "react-final-form";
 import {FORM_ERROR} from "final-form";
 import {withStyles} from "@material-ui/core/styles";
 import styles from "./styles";
+import PropTypes from "prop-types";
 
 class AccountsUI extends Component {
   constructor(props) {
@@ -208,5 +209,9 @@ class AccountsUI extends Component {
     );
   }
 }
+
+AccountsUI.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
 export default withStyles(styles)(AccountsUI);
