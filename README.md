@@ -1,3 +1,5 @@
+# Team-Mates
+
 Team-Mates: A web app that user can register to form teams. Users will be able to see all the registered teams and members, create new teams and update their information. The app is handy for party games, friends meetings, fun social events.
 
 ## Author
