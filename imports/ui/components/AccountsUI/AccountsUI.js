@@ -6,7 +6,8 @@ import ReactDOM from "react-dom";
 import {Form, Field} from "react-final-form";
 import {FORM_ERROR} from "final-form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import "./styles.css";
+import {withStyles} from "@material-ui/core/styles";
+import styles from "./styles";
 
 class AccountsUI extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class AccountsUI extends Component {
         err => {
           if (err) {
             return {
-              [FORM_ERROR]: "Usernam or email is already registered"
+              [FORM_ERROR]: "Username or email is already registered"
             };
           }
         }
@@ -59,7 +60,24 @@ class AccountsUI extends Component {
     }
   };
 
+  validate = (values, isLogin) => {
+    const errors = {};
+    if (!values.username) {
+      errors.username = "Username is required";
+    }
+    if (!values.password) {
+      errors.password = "Password is required";
+    }
+    if (!isLogin && !values.email) {
+      errors.email = "Email is required";
+    } else if (!isLogin && /.*@.*\..*/.test(values.email) === false) {
+      errors.email = "Please enter a valid email";
+    }
+    return errors;
+  };
+
   render() {
+    const {classes} = this.props;
     return (
       <div>
         <div onClick={this.facebookLogin}>
@@ -68,6 +86,9 @@ class AccountsUI extends Component {
         </div>
         <Form
           onSubmit={(values, err) => this.onSubmit(values, err)}
+          validate={values => {
+            return this.validate(values, this.state.loginToggle);
+          }}
           render={({
             handleSubmit,
             form,
@@ -99,6 +120,11 @@ class AccountsUI extends Component {
                             margin="normal"
                             variant="outlined"
                           />
+                          {meta.touched && meta.invalid && (
+                            <Typography className={classes.errorMessage}>
+                              {meta.error}
+                            </Typography>
+                          )}
                         </div>
                       )}
                     />
@@ -108,15 +134,22 @@ class AccountsUI extends Component {
                   <Field
                     name="username"
                     render={({input, meta}) => (
-                      <TextField
-                        {...input}
-                        autoComplete="off"
-                        label="Username"
-                        type="username"
-                        name="username"
-                        margin="normal"
-                        variant="outlined"
-                      />
+                      <div>
+                        <TextField
+                          {...input}
+                          autoComplete="off"
+                          label="Username"
+                          type="username"
+                          name="username"
+                          margin="normal"
+                          variant="outlined"
+                        />
+                        {meta.touched && meta.invalid && (
+                          <Typography className={classes.errorMessage}>
+                            {meta.error}
+                          </Typography>
+                        )}
+                      </div>
                     )}
                   />
                 </FormControl>
@@ -124,14 +157,21 @@ class AccountsUI extends Component {
                   <Field
                     name="password"
                     render={({input, meta}) => (
-                      <TextField
-                        {...input}
-                        autoComplete="off"
-                        label="Password"
-                        type="password"
-                        margin="normal"
-                        variant="outlined"
-                      />
+                      <div>
+                        <TextField
+                          {...input}
+                          autoComplete="off"
+                          label="Password"
+                          type="password"
+                          margin="normal"
+                          variant="outlined"
+                        />
+                        {meta.touched && meta.invalid && (
+                          <Typography className={classes.errorMessage}>
+                            {meta.error}
+                          </Typography>
+                        )}
+                      </div>
                     )}
                   />
                   <Typography>
@@ -158,6 +198,11 @@ class AccountsUI extends Component {
                     {this.state.loginToggle ? "Login" : "Register"}
                   </Button>
                 </FormControl>
+                {hasSubmitErrors && (
+                  <Typography className={classes.errorMessage}>
+                    {submitError}
+                  </Typography>
+                )}
               </form>
             );
           }}
@@ -167,4 +212,4 @@ class AccountsUI extends Component {
   }
 }
 
-export default AccountsUI;
+export default withStyles(styles)(AccountsUI);
