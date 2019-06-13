@@ -11,6 +11,7 @@ import {
 import {Form, Field} from "react-final-form";
 import styles from "./styles";
 import {withStyles} from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 
 class ProfileCard extends Component {
   constructor(props) {
@@ -24,8 +25,7 @@ class ProfileCard extends Component {
     if (this.state.isEditing) {
       Meteor.users.update(this.props.currentUserId, {
         $set: {
-          username: values.username,
-          "emails[0]address": values.email
+          username: values.username
         }
       });
       if (err) {
@@ -49,15 +49,7 @@ class ProfileCard extends Component {
         {isEditing ? (
           <Form
             onSubmit={(values, err) => this.onSubmit(values, err)}
-            render={({
-              handleSubmit,
-              form,
-              submitting,
-              pristine,
-              hasValidationErrors,
-              hasSubmitErrors,
-              submitError
-            }) => {
+            render={({handleSubmit, submitting, pristine}) => {
               return (
                 <form
                   onSubmit={e => {
@@ -65,28 +57,10 @@ class ProfileCard extends Component {
                     handleSubmit(e);
                   }}
                 >
-                  <FormControl>
-                    <Field
-                      name="email"
-                      render={({input, meta}) => (
-                        <div>
-                          <TextField
-                            {...input}
-                            autoComplete="off"
-                            label="Email"
-                            type="email"
-                            name="email"
-                            margin="normal"
-                            variant="outlined"
-                          />
-                        </div>
-                      )}
-                    />
-                  </FormControl>
                   <FormControl fullWidth>
                     <Field
                       name="username"
-                      render={({input, meta}) => (
+                      render={({input}) => (
                         <TextField
                           {...input}
                           autoComplete="off"
@@ -104,7 +78,7 @@ class ProfileCard extends Component {
                       type="submit"
                       variant="contained"
                       size="medium"
-                      disabled={submitting || pristine || hasValidationErrors}
+                      disabled={submitting || pristine}
                     >
                       {this.state.isEditing ? "Save" : "Edit"}
                     </Button>
@@ -159,5 +133,12 @@ class ProfileCard extends Component {
     );
   }
 }
+
+ProfileCard.propTypes = {
+  classes: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
+  groups: PropTypes.array.isRequired,
+  currentUserId: PropTypes.string.isRequired
+};
 
 export default withStyles(styles)(ProfileCard);

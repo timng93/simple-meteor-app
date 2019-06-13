@@ -4,6 +4,7 @@ import styles from "./styles";
 import {withStyles} from "@material-ui/core/styles";
 import {withTracker} from "meteor/react-meteor-data";
 import {Groups} from "../../../api/groups";
+import PropTypes from "prop-types";
 
 const Profile = ({classes, currentUser, currentUserId, groups}) => {
   return (
@@ -17,6 +18,13 @@ const Profile = ({classes, currentUser, currentUserId, groups}) => {
       ) : null}
     </div>
   );
+};
+
+Profile.propTypes = {
+  classes: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
+  groups: PropTypes.array.isRequired,
+  currentUserId: PropTypes.string.isRequired
 };
 
 export default withTracker(() => {
