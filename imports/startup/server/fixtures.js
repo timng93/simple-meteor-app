@@ -1,16 +1,7 @@
 import {Meteor} from "meteor/meteor";
-import {Clients} from "../../api/clients";
 import {Groups} from "../../api/groups";
 
 Meteor.startup(() => {
-  if (Clients.find().count() === 0) {
-    Clients.insert({
-      _id: "1",
-      firstname: "Tim",
-      lastname: "Nguyen",
-      email: "timtim@mail.com"
-    });
-  }
   if (Groups.find().count() === 0) {
     Groups.insert({
       _id: "1",
