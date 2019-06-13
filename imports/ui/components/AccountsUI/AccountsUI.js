@@ -1,11 +1,9 @@
-import React, {Component, Fragment} from "react";
+import React, {Component} from "react";
 import {Meteor} from "meteor/meteor";
 import {Accounts} from "meteor/accounts-base";
 import {Button, FormControl, Typography, TextField} from "@material-ui/core";
-import ReactDOM from "react-dom";
 import {Form, Field} from "react-final-form";
 import {FORM_ERROR} from "final-form";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {withStyles} from "@material-ui/core/styles";
 import styles from "./styles";
 
@@ -81,11 +79,10 @@ class AccountsUI extends Component {
     return (
       <div>
         <div onClick={this.facebookLogin}>
-          <FontAwesomeIcon icon={["fab", "facebook"]} />
-          <div>Sign in With Facebook</div>
+          <Button>Sign in With Facebook</Button>
         </div>
         <Form
-          onSubmit={(values, err) => this.onSubmit(values, err)}
+          onSubmit={values => this.onSubmit(values)}
           validate={values => {
             return this.validate(values, this.state.loginToggle);
           }}
@@ -188,7 +185,7 @@ class AccountsUI extends Component {
                     </button>
                   </Typography>
                 </FormControl>
-                <FormControl>
+                <FormControl margin="normal">
                   <Button
                     type="submit"
                     variant="contained"
