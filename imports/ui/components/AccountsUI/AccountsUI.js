@@ -7,6 +7,8 @@ import {FORM_ERROR} from "final-form";
 import {withStyles} from "@material-ui/core/styles";
 import styles from "./styles";
 import PropTypes from "prop-types";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faFacebook} from "@fortawesome/free-brands-svg-icons";
 
 class AccountsUI extends Component {
   constructor(props) {
@@ -80,7 +82,13 @@ class AccountsUI extends Component {
     return (
       <div>
         <div onClick={this.facebookLogin}>
-          <Button>Sign in With Facebook</Button>
+          <Button className={classes.facebookButton}>
+            {" "}
+            <FontAwesomeIcon icon={faFacebook} />
+            <Typography className={classes.facebookButtonText}>
+              Sign in With Facebook
+            </Typography>
+          </Button>
         </div>
         <Form
           onSubmit={values => this.onSubmit(values)}

@@ -6,6 +6,12 @@ const styles = () => ({
   errorMessage: {
     color: "#FF6666",
     margin: 10
+  },
+  facebookButton: {
+    backgroundColor: "#ADD8E6"
+  },
+  facebookButtonText: {
+    marginLeft: 10
   }
 });
 
