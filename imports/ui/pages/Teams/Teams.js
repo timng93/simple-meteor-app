@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import styles from "./styles";
+import PropTypes from "prop-types";
 
 const Teams = ({classes, users, groups}) => {
   return (
@@ -40,10 +41,17 @@ const Teams = ({classes, users, groups}) => {
       <Typography className={classes.header}>
         Let's create a new team
       </Typography>
-      <TeamsUI users={users} />
+      <TeamsUI users={users} groups={groups} />
     </Fragment>
   );
 };
+
+Teams.propTypes = {
+  classes: PropTypes.object.isRequired,
+  groups: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired
+};
+
 export default withTracker(() => {
   Meteor.subscribe("groups");
   Meteor.subscribe("users");

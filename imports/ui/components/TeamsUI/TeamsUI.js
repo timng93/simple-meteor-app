@@ -1,14 +1,12 @@
 import React from "react";
-import {Meteor} from "meteor/meteor";
-import {Groups} from "../../../api/groups";
-import {withTracker} from "meteor/react-meteor-data";
 import {Button, FormControl, Typography, TextField} from "@material-ui/core";
 import {Form, Field} from "react-final-form";
 import styles from "./styles";
 import {withStyles} from "@material-ui/core/styles";
 import Select from "react-select";
+import PropTypes from "prop-types";
 
-const TeamsUI = ({users, classes}) => {
+const TeamsUI = ({users, classes, groups}) => {
   onSubmit = ({name, options}) => {
     Groups.insert({
       name,
@@ -103,11 +101,10 @@ const TeamsUI = ({users, classes}) => {
     </div>
   );
 };
+TeamsUI.propTypes = {
+  classes: PropTypes.object.isRequired,
+  groups: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired
+};
 
-export default withTracker(() => {
-  Meteor.subscribe("groups");
-
-  return {
-    groups: Groups.find().fetch()
-  };
-})(withStyles(styles)(TeamsUI));
+export default withStyles(styles)(TeamsUI);
