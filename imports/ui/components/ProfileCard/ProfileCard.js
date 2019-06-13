@@ -38,10 +38,10 @@ class ProfileCard extends Component {
 
   render() {
     const {isEditing} = this.state;
-    const {classes, currentUser} = this.props;
+    const {classes, currentUser, currentUserId} = this.props;
     const selectedGroups = this.props.groups.filter(group => {
       return group.selectedMembers.find(selectedMember => {
-        return selectedMember.label === currentUser.username;
+        return selectedMember.value === currentUserId;
       });
     });
     return (

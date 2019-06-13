@@ -24,7 +24,7 @@ Profile.propTypes = {
   classes: PropTypes.object.isRequired,
   currentUser: PropTypes.object,
   groups: PropTypes.array.isRequired,
-  currentUserId: PropTypes.string.isRequired
+  currentUserId: PropTypes.string
 };
 
 export default withTracker(() => {
