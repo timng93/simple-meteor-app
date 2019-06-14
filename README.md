@@ -12,11 +12,11 @@ Team-Mates: A web app that user can register to form teams. Users will be able t
 
 - Profile
 
-<img src="./screenshots/profile.png" width="1200" height="800">
+<img src="./screenshots/profile-screen.png" width="1200" height="800">
 
 - Teams
 
-<img src="./screenshots/teams.png" width="1200" height="800">
+<img src="./screenshots/teams-scree.png" width="1200" height="800">
 
 ## Author
 
