@@ -16,7 +16,7 @@ Team-Mates: A web app that user can register to form teams. Users will be able t
 
 - Teams
 
-<img src="./screenshots/teams-scree.png" width="1200" height="800">
+<img src="./screenshots/teams-screen.png" width="1200" height="800">
 
 ## Author
 
