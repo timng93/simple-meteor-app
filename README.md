@@ -4,6 +4,20 @@ Deployed at: https://team-mates-meteor-app.herokuapp.com
 
 Team-Mates: A web app that user can register to form teams. Users will be able to see all the registered teams and members, create new teams and update their information. The app is handy for party games, friends meetings, fun social events.
 
+## Screenshots
+
+- Register
+
+<img src="./screenshots/register.png" width="1200" height="800">
+
+- Profile
+
+<img src="./screenshots/profile.png" width="1200" height="800">
+
+- Teams
+
+<img src="./screenshots/teams.png" width="1200" height="800">
+
 ## Author
 
 - Tim Nguyen
